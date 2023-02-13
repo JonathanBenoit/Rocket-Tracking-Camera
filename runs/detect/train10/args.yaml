@@ -1,14 +1,15 @@
 task: detect
 mode: train
 model: null
-data: datasets\RockETS-Rockets-2\data.yaml
-epochs: 20
+data: C:/Users/justi/OneDrive/Desktop/workspace/Ecole/Session 8/Rocket-Tracking-Camera/Train/datasets/RockETS-Rockets-9/data.yaml
+epochs: 1
 patience: 50
 batch: 16
 imgsz: 640
 save: true
+save_period: -1
 cache: false
-device: 0
+device: null
 workers: 4
 project: null
 name: null
@@ -24,10 +25,12 @@ rect: false
 cos_lr: false
 close_mosaic: 10
 resume: false
+min_memory: false
 overlap_mask: true
 mask_ratio: 4
 dropout: 0.0
 val: true
+split: val
 save_json: false
 save_hybrid: false
 conf: null
