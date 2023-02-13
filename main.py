@@ -2,6 +2,9 @@ from ultralytics import YOLO
 from roboflow import Roboflow
 import os
 import shutil
+from PIL import Image
+import numpy as np
+import cv2
 
 
 def dowload_dataset(dataset_version):
@@ -17,10 +20,9 @@ def dowload_dataset(dataset_version):
 
 def train(model, dataset_version):
     model.train(data="C:/Users/RockETS/Documents/Justin/PFE/Rocket-Tracking-Camera/datasets/RockETS-Rockets-9/data.yaml", epochs=100, imgsz=640, workers=4)
-    results = model.val()
 
 def test(model):
-    results = model("Aarluk-III.jpg")
+    results = model("test.webp", save=True)
     printResults(results)
 
 def printResults(results):
@@ -28,12 +30,13 @@ def printResults(results):
         return
 
     for result in results:
-        if(result.boxes.xyxy):
-            print(result.boxes.xyxy)
+        boxes = result.boxes
+        print(boxes)
+
 
 if __name__ == "__main__":
     dataset_version = 9
-    model = YOLO("yolov8n.yaml")
-    dowload_dataset(dataset_version)
-    train(model, dataset_version)
-    #test(model)
+    model = YOLO("runs\\detect\\train31\\weights\\best.pt")
+    #dowload_dataset(dataset_version)
+    #train(model, dataset_version)
+    test(model)
